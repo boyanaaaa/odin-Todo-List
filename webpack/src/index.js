@@ -1,18 +1,42 @@
 import { greeting } from "./greeting.js";
 import "./styles.css";
-import odinImage from "./odin.png";
+
 
 console.log(greeting);
-const image = document.createElement("img");
-image.src = odinImage;
-document.body.appendChild(image);
 
-
+const Todo = document.querySelector(".Todo");
 const todosContainer = document.querySelector(".showTodosContainer");
+const btnAddProject = document.querySelector(".btnAddProject");
+const cancelBtn = document.querySelector(".cancelBtn");
+const createProjectBtn = document.querySelector(".createProjectBtn");
+const overlayDiv = document.querySelector(".overlay");
+const formNewProject = document.querySelector(".formNewProject");
 
 
 
 
+
+/* Single Project */
+
+btnAddProject.addEventListener("click", () =>{   
+    overlayDiv.classList.remove("hidden");
+    formNewProject.classList.remove("hidden");
+})
+
+cancelBtn.addEventListener("click", () => {
+    overlayDiv.classList.add("hidden");
+    formNewProject.classList.add("hidden");
+})
+
+
+
+
+
+
+
+
+
+/* Single Todo */
 const todo = document.createElement("div");
 todo.classList.add("todo");
 todosContainer.appendChild(todo);

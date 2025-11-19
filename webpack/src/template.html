@@ -14,7 +14,15 @@
 3. Expand a single todo to see/edit its details.
 4. Delete a todo.
  --> 
-<div class="projectsContainer"></div>
+<div class="Todo">
+
+
+
+<div class="projectsContainer">
+    <p class="projectsHeading">Projects</p>
+    <button class="btnAddProject">Add Projects</button>
+    
+</div>
 <div class="mainContainer">
     <div class="mainTitle"></div>
     <div class="showTodosContainer"></div>
@@ -24,7 +32,18 @@
 
  
 
-
-
+<div class="overlay hidden"></div>
+<div class="formNewProject hidden">
+    <div>
+    <p class="formProjectHeading">Add New Project</p>
+    <p class="projectName">Project Name:</p>
+    <input type="text" id="projectInput" class="projectInput" placeholder="e.g., Work, Personal, Shopping..." required>
+    </div>
+    <div class="formProjectBtns">
+        <button class="cancelBtn">Cancel</button>
+        <button class="createProjectBtn">Create Project</button>
+    </div>
+</div>
+</div>
 </body>
 </html>
