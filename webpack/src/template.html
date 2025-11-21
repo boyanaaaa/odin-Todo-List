@@ -19,7 +19,10 @@
 
 
 <div class="projectsContainer">
-    <p class="projectsHeading">Projects</p>
+    
+    <div class="newProjectsContainer">
+        <p class="projectsHeading">Projects</p>
+    </div>
     <button class="btnAddProject">Add Projects</button>
     
 </div>
@@ -34,11 +37,11 @@
 
 <div class="overlay hidden"></div>
 <div class="formNewProject hidden">
-    <div>
+    <form>
     <p class="formProjectHeading">Add New Project</p>
     <p class="projectName">Project Name:</p>
     <input type="text" id="projectInput" class="projectInput" placeholder="e.g., Work, Personal, Shopping..." required>
-    </div>
+    </form>
     <div class="formProjectBtns">
         <button class="cancelBtn">Cancel</button>
         <button class="createProjectBtn">Create Project</button>

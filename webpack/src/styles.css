@@ -129,6 +129,35 @@ body {
 }
 
 
+.newProjectsContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.newProject{
+  margin-top: 20px;
+  padding: 5px 15px;
+  color: #fff;
+  background-color: rgb(97, 109, 155);
+  display: flex;
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 15px;
+}
+
+.removeBtn{
+  font-size: 18px;
+  height: 46px;
+  padding: 0px 16px;
+  border: 0 solid;
+  border-radius: 10px;
+  color: var(--dark-blue);
+  align-self: center;
+}
+
 
 
 
