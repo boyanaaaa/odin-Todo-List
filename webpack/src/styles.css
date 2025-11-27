@@ -62,7 +62,8 @@ body {
 
 /* Form for new projects */
 
-.formNewProject {
+.formNewProject,
+.formNewTodo {
   position: fixed;
   top: 30%;
   left: 30%;
@@ -91,7 +92,8 @@ body {
 
 }
 
-.projectInput{
+.projectInput,
+.todoInput{
   width: 540px;
   height: 30px;
 }
@@ -108,7 +110,9 @@ body {
 }
 
 .cancelBtn, 
-.createProjectBtn{
+.createProjectBtn,
+.cancelBtnTodo,
+.createTodoBtn{
   font-size: 18px;
   padding: 8px 16px;
   border: 0 solid;
@@ -116,16 +120,57 @@ body {
   color: #fff;
 }
 
-.cancelBtn{
+.cancelBtn,
+.cancelBtnTodo{
   background-color: rgb(112, 112, 112);
 }
 
-.createProjectBtn{
+.createProjectBtn,
+.createTodoBtn{
   background-color: var(--dark-blue);;
 }
 
+
+
 .hidden {
   display: none;
+}
+
+
+
+/* New Todo Popup Container */
+
+.formNewTodo {
+  height: 500px;
+}
+
+.todoDescription{
+  width: 540px;
+  height: 90px;
+}
+
+
+/* Todo */
+.todo {
+  background-color: #fff;
+  border: 1px solid var(--dark-blue);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 4px 10px var(--dark-blue); 
+  margin-bottom: 15px;
+  transition: 0.2s ease;
+}
+
+.todo:hover {
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  transform: translateY(-2px);
+}
+
+.descTodo{
+  font-size: 18px;
+  font-weight: 600;
+  color:rgb(112, 113, 115)
 }
 
 
@@ -166,6 +211,8 @@ body {
 .mainContainer{
   border: 2px solid rgb(63, 69, 152);
   display: flex;
+  flex-direction: column;
+  align-items: center;
   max-width: 70vw;
   min-width: 40vw;
 }

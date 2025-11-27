@@ -1,3 +1,4 @@
+
 import { greeting } from "./greeting.js";
 import "./styles.css";
 
@@ -12,8 +13,20 @@ const createProjectBtn = document.querySelector(".createProjectBtn");
 const overlayDiv = document.querySelector(".overlay");
 const formNewProject = document.querySelector(".formNewProject");
 const newProjectsContainer = document.querySelector(".newProjectsContainer");
+const mainTitle = document.querySelector(".mainTitle");
+
+const btnAddTodo = document.querySelector(".btnAddTodo");
+const formNewTodo = document.querySelector(".formNewTodo");
+const cancelBtnTodo = document.querySelector(".cancelBtnTodo");
+const createTodoBtn = document.querySelector(".createTodoBtn");
+const todoInput = document.querySelector(".todoInput");
+const todoDescription = document.querySelector(".todoDescription");
+const todoDueDate = document.querySelector(".todoDueDate");
+const todoPriority = document.querySelector("#todoPriority");
 
 
+let projects = {};          
+let currentProject = null; 
 
 
 /* Single Project */
@@ -29,73 +42,153 @@ cancelBtn.addEventListener("click", () => {
 })
 
 
+function generateProjectId() {
+  const randomPart = Math.random().toString(36).substring(2, 7); 
+  return "proj" + randomPart; 
+}
+
+
 createProjectBtn.addEventListener("click", ()=> {
     overlayDiv.classList.add("hidden");
     formNewProject.classList.add("hidden"); 
+  
+    const projId = generateProjectId();
+    projects[projId] = []; 
 
     const newProject = document.createElement("div");
-    newProject.classList.add("newProject");
-    newProject.innerHTML = `
-    <h2>${projectInput.value}</h2>
-    <button class="removeBtn">Remove</button>
-  `;
+    newProject.classList.add("newProject", projId);
+    newProject.dataset.id = projId;
 
-    const removeBtn = newProject.querySelector(".removeBtn");
-      removeBtn.addEventListener("click", () => {
-          newProject.remove();  // ← изтрива точно този елемент
-      });
+    const projectName = projectInput.value;
+
+    newProject.innerHTML = `
+    <h2>${projectName}</h2>
+    <button class="removeBtn">Remove</button>`;
+
 
 
 
     newProjectsContainer.appendChild(newProject);
     projectInput.value = "";
-
-})
-
+    
 
 
+     newProject.addEventListener("click", (e) => {
+        currentProject = e.currentTarget.dataset.id;  ;
+        currentProjectName.innerText = "Project: " + newProject.querySelector("h2").innerText;;
+        renderTodos();
+        btnAddTodo.classList.remove("hidden");
+        });
+
+
+        newProject.querySelector(".removeBtn").addEventListener("click", (e) => {
+            e.stopPropagation(); // важно: да не се активира click на project
+
+            const removedId = newProject.dataset.id;
+
+            delete projects[removedId];
+            newProject.remove();
+
+            if (currentProject === removedId) {
+                currentProject = null;
+                currentProjectName.innerText = ""; 
+                btnAddTodo.classList.add("hidden");
+                todosContainer.innerHTML = ""; 
+            }
+        });
+
+
+    });
+
+
+const currentProjectName = document.createElement("p");
+currentProjectName.classList.add("currentProjectName");
+currentProjectName.innerText = "Project";
+mainTitle.appendChild(currentProjectName);
 
 
 
 
 
-/* Single Todo  */
-const todo = document.createElement("div");
-todo.classList.add("todo");
-todosContainer.appendChild(todo);
 
-const todoTitle = document.createElement("h2");
-todoTitle.textContent = "Go shopping";
-todo.appendChild(todoTitle);
 
-const todoDesription = document.createElement("p");
-todoDesription.textContent = "Shopping List: ****";
-todo.appendChild(todoDesription);
 
-const todoDate = document.createElement("input");
-todoDate.setAttribute("id", "todoDate");
-todoDate.setAttribute("type", "date");
-todo.appendChild(todoDate);
 
-const todoPriority = document.createElement("select");
-todoPriority.id = "todoPriority";
-["Low", "Medium", "High"].forEach(level => {
-  const option = document.createElement("option");
-  option.value = level;
-  option.textContent = level;
-  todoPriority.appendChild(option);
+
+/* Create New Todo Button*/
+
+btnAddTodo.addEventListener("click", () =>{
+  overlayDiv.classList.remove("hidden");
+  formNewTodo.classList.remove("hidden");
+
 });
-todo.appendChild(todoPriority);
 
 
-/*
+
+
+
+
+
+/* Render Todo Date */
+function renderTodos() {
+  if (!currentProject || !projects[currentProject]) return;
+    todosContainer.innerHTML = "";
+
+    projects[currentProject].forEach(todo => {
+        todosContainer.appendChild(createTodo(todo));
+    });
+}
+
+
+
+
+
+/* Form Create New Todo */
+
+cancelBtnTodo.addEventListener("click", () => {
+  overlayDiv.classList.add("hidden");
+  formNewTodo.classList.add("hidden");
+});
+
+createTodoBtn.addEventListener("click", ()=> {
+
+
+
+   if (!currentProject) {
+       alert("Select a project first!");
+       return;
+   }
+
+
+   const todoData = {
+    title: todoInput.value,
+    description: todoDescription.value,
+    date: todoDueDate.value,
+    priority: todoPriority.value
+    };
+
+
+    projects[currentProject].push(todoData); 
+    renderTodos();
+
+    todoInput.value = "";
+    todoDescription.value = "";
+    todoDueDate.value = "";
+    todoPriority.value = "low";
+
+    overlayDiv.classList.add("hidden");
+    formNewTodo.classList.add("hidden");
+})
+ 
+
+
 function createTodo({ title, description, date, priority }) {
   const todo = document.createElement("div");
   todo.classList.add("todo");
 
   todo.innerHTML = `
     <h2>${title}</h2>
-    <p>${description}</p>
+    <p class="descTodo">${description}</p>
     <input type="date" value="${date}">
   `;
 
@@ -112,19 +205,6 @@ function createTodo({ title, description, date, priority }) {
   return todo;
 }
 
-const todoData = {
-  title: titleInput.value,
-  description: descriptionInput.value,
-  date: dateInput.value,
-  priority: priorityInput.value
-}
 
-todosContainer.appendChild(createTodo(todoData));
-todosContainer.appendChild(createTodo({
-      title: "Shopping",
-      description: "My shopping list: ****",
-      date: "2021-03-22",
-      priority: "High"
-}));
 
-*/
+

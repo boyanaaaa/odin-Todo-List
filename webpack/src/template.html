@@ -27,8 +27,12 @@
     
 </div>
 <div class="mainContainer">
-    <div class="mainTitle"></div>
+    <div class="mainTitle">
+      
+    </div>
+    <button class="btnAddTodo hidden">Add Todo</button>
     <div class="showTodosContainer"></div>
+    
 </div>
 
 
@@ -47,6 +51,33 @@
         <button class="createProjectBtn">Create Project</button>
     </div>
 </div>
+
+
+
+
+<div class="formNewTodo hidden">
+    <form>
+    <p class="formTodoHeading">Add New Todo</p>
+    <p class="todoName">Todo Name:</p>
+    <input type="text" id="todoInput" class="todoInput" placeholder="e.g., Finish report" required>
+    <p class="todoDescriptionHeading">Description:</p>
+    <input type="text" id="todoDescription" class="todoDescription" placeholder="Add details about this task" required>
+    <p class="todoName">Due date:</p>
+    <input type="date" id="todoDueDate" class="todoDueDate" required>
+    <p class="todoPriority">Priority:</p>
+    <select name="todoPriority" id="todoPriority">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+    </select>
+    </form>
+    <div class="formTodoBtns">
+        <button class="cancelBtnTodo">Cancel</button>
+        <button class="createTodoBtn">Create Todo</button>
+    </div>
+</div>
+
+
 </div>
 </body>
 </html>
